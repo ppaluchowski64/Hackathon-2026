@@ -6,7 +6,8 @@ func _draw() -> void:
 	if not player.is_grappling:
 		return
 	
-	draw_line(Vector2.ZERO, player.grapple_pos - player.position, Color("#363D52"), 10)
+	draw_line(Vector2(-8, 5).rotated(player.global_rotation), player.grapple_pos - player.position, Color("#000000"), 10)
+	draw_line(Vector2(-8, 5).rotated(player.global_rotation), player.grapple_pos - player.position, Color("#8a423a"), 8)
 
 func _physics_process(_delta: float) -> void:
 	global_rotation = 0

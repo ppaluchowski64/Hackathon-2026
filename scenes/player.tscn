@@ -12,32 +12,35 @@ bounce = 0.2
 radius = 7.0
 height = 48.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+height = 26.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
 
 [node name="Player" type="RigidBody2D" unique_id=515138175]
+z_index = 1
 physics_material_override = SubResource("PhysicsMaterial_qhqgy")
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=86836251]
 texture = ExtResource("1_3vyb7")
+hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1385192029]
-position = Vector2(-17, 0)
 shape = SubResource("CapsuleShape2D_7dpn4")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=286337260]
-position = Vector2(0, -17)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=478920971]
+position = Vector2(0, -7)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_7dpn4")
+shape = SubResource("CapsuleShape2D_qlg0r")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1236936994]
-position = Vector2(17, 0)
-shape = SubResource("CapsuleShape2D_7dpn4")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=1270156349]
-position = Vector2(0, 17)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1623024221]
+position = Vector2(0, 8)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_7dpn4")
+shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="Grapple" type="Area2D" parent="." unique_id=2112162011]
 collision_layer = 4
@@ -47,4 +50,5 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_yf5fn")
 
 [node name="ArmDraw" type="Node2D" parent="." unique_id=730564773]
+z_index = -1
 script = ExtResource("3_qhqgy")
