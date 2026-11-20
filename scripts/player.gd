@@ -5,14 +5,21 @@ class_name Player
 var is_grappling: bool = false
 var grapple_pos: Vector2
 
-func _physics_process(_delta: float) -> void:
+var stamina: float = 100
+var exhaustion: float = 0
+
+func _physics_process(delta: float) -> void:
 	grapple.global_rotation = 0
 	
 	if is_grappling:
 		grapple.global_position = grapple_pos
 		apply_central_force((grapple.global_position - global_position).normalized() * 2000)
+		stamina = clampf(stamina - delta * 6 * (exhaustion / 50 + 1), 0, 100)
+		exhaustion = clampf(exhaustion + delta * 24, 0, 100)
 	else:
 		grapple.global_position = get_global_mouse_position()
+		stamina = clampf(stamina + delta * 4.5, 0, 100)
+		exhaustion = clampf(exhaustion - delta * 48, 0, 100)
 	
 	if grapple.get_overlapping_bodies() and Input.is_action_just_pressed("grapple"):
 		is_grappling = true
