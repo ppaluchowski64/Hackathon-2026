@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cqtrr1eu47rgl"]
+
+[ext_resource type="Texture2D" uid="uid://cqmwjdpijn7h2" path="res://graphics/player.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://c11ir3jjflvvf" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dml8jct682rd0" path="res://scripts/arm_draw.gd" id="3_qhqgy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qhqgy"]
+friction = 0.5
+bounce = 0.2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dpn4"]
+radius = 7.0
+height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+
+[node name="Player" type="RigidBody2D" unique_id=515138175]
+physics_material_override = SubResource("PhysicsMaterial_qhqgy")
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=86836251]
+texture = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1385192029]
+position = Vector2(-17, 0)
+shape = SubResource("CapsuleShape2D_7dpn4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=286337260]
+position = Vector2(0, -17)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_7dpn4")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1236936994]
+position = Vector2(17, 0)
+shape = SubResource("CapsuleShape2D_7dpn4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=1270156349]
+position = Vector2(0, 17)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_7dpn4")
+
+[node name="Grapple" type="Area2D" parent="." unique_id=2112162011]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple" unique_id=1835407281]
+shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="ArmDraw" type="Node2D" parent="." unique_id=730564773]
+script = ExtResource("3_qhqgy")

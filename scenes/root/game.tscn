@@ -1,0 +1,45 @@
+[gd_scene format=4 uid="uid://bj56djo3f5fou"]
+
+[ext_resource type="Texture2D" uid="uid://6jkm04mv4k86" path="res://graphics/tile.png" id="1_7dpn4"]
+[ext_resource type="Script" uid="uid://cj4xfpq1jl3u1" path="res://scripts/game.gd" id="1_ncd4d"]
+[ext_resource type="PackedScene" uid="uid://cqtrr1eu47rgl" path="res://scenes/player.tscn" id="1_rf1xt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncd4d"]
+texture = ExtResource("1_7dpn4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_g4v7s"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 5
+physics_layer_0/collision_mask = 5
+physics_layer_1/collision_layer = 4
+physics_layer_1/collision_mask = 4
+sources/0 = SubResource("TileSetAtlasSource_ncd4d")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
+distance = -64.0
+
+[node name="Game" type="Node2D" unique_id=1841285064]
+script = ExtResource("1_ncd4d")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=332159170]
+tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAD///z/AAAAAAAAAAD///v/AAAAAAAAAAAAAPv/AAAAAAAAAAABAPz/AAAAAAAAAAABAP3/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP3/AAAAAAAAAAAAAPz/AAAAAAAAAAD+//r/AAAAAAAAAAD+//v/AAAAAAAAAAD+//z/AAAAAAAAAAD+//3/AAAAAAAAAAD+//7/AAAAAAAAAAD+//n/AAAAAAAAAAD///n/AAAAAAAAAAAAAPn/AAAAAAAAAAABAPn/AAAAAAAAAAD9//z/AAAAAAAAAAD8//z/AAAAAAAAAAD8//3/AAABAAAAAAD9//3/AAABAAAAAAD9//7/AAABAAAAAAD8//7/AAABAAAAAAD7//v/AAABAAAAAAD7//z/AAABAAAAAAD9//r/AAABAAAAAAD8//r/AAABAAAAAAD8//v/AAABAAAAAAD9//v/AAABAAAAAAD+/wAAAAABAAAAAAD+/wEAAAABAAAAAAACAPz/AAABAAAAAAACAP3/AAABAAAAAAACAP7/AAABAAAAAAACAP//AAABAAAAAAADAP//AAABAAAAAAADAP7/AAABAAAAAAADAP3/AAABAAAAAAAEAAEAAAABAAAAAAAFAAEAAAABAAAAAAD///r/AAABAAAAAAA=")
+tile_set = SubResource("TileSet_g4v7s")
+
+[node name="Player" parent="." unique_id=515138175 instance=ExtResource("1_rf1xt")]
+position = Vector2(-120, 0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=906975302]
+zoom = Vector2(1.5, 1.5)
+process_callback = 0
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1117965508]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=509856899]
+shape = SubResource("WorldBoundaryShape2D_g4v7s")
