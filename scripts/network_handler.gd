@@ -1,6 +1,7 @@
 extends Node
 
 signal lobby_list_received(lobby_list: Array)
+signal join_lobby_result(success: bool, message: String)
 
 var multiplayer_peer = ENetMultiplayerPeer.new()
 
@@ -145,3 +146,5 @@ func join_lobby_response(success: bool, msg: String, room_id: String, peers: Arr
 		local_room_id = room_id
 		peer_ids = peers
 		player_names = names
+	
+	join_lobby_result.emit(success, msg)

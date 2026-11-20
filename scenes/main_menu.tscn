@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dhg8oenlnrmsd"]
+
+[ext_resource type="Script" uid="uid://bmpnuaa1n8qr3" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://d041al1rxost4" path="res://scenes/lobby_list.tscn" id="2_ekxnf"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1073614414]
+script = ExtResource("1_l6cm7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=812721200]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1726534691]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1602101850]
+custom_minimum_size = Vector2(0, 2)
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+text = "Game Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=417329296]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=531962329]
+layout_mode = 2
+
+[node name="CreateLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer" unique_id=1149591683]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Create Lobby"
+
+[node name="JoinLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer" unique_id=1445521859]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Join Lobby"
+
+[node name="Spacer2" type="Control" parent="MarginContainer/VBoxContainer" unique_id=962896445]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=532915878]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/margin_right = 12
+
+[node name="PlayerNameInputContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=960417591]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/PlayerNameInputContainer" unique_id=1762457443]
+layout_mode = 2
+text = "Player Name"
+
+[node name="PlayerNameInput" type="LineEdit" parent="MarginContainer/VBoxContainer/MarginContainer/PlayerNameInputContainer" unique_id=738576585]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+placeholder_text = "Player 1"
+max_length = 15
+
+[node name="LobbyList" parent="MarginContainer/VBoxContainer" unique_id=1735094091 instance=ExtResource("2_ekxnf")]
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/CreateLobbyButton" to="." method="_on_create_lobby_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/JoinLobbyButton" to="." method="_on_join_lobby_button_pressed"]
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/MarginContainer/PlayerNameInputContainer/PlayerNameInput" to="." method="_on_player_name_input_text_submitted"]

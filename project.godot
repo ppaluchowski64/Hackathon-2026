@@ -15,6 +15,10 @@ run/main_scene="res://scenes/root/game.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+NetworkHandler="*uid://c5xj0107gee3s"
+
 [display]
 
 window/size/viewport_width=960

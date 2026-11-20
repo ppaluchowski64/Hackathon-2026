@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d041al1rxost4"]
+
+[ext_resource type="Script" uid="uid://dgu0bhfe1jnfo" path="res://scripts/lobby_list.gd" id="1_dtt3s"]
+
+[node name="LobbyList" type="CanvasLayer" unique_id=1735094091]
+script = ExtResource("1_dtt3s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=874623723]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer" unique_id=356638887]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1526416671]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lobbies"
+horizontal_alignment = 1
+
+[node name="LobbyListContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1942393975]
+layout_mode = 2
+alignment = 1
