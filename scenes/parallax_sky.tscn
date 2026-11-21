@@ -1,0 +1,616 @@
+[gd_scene format=3 uid="uid://xoum1a1s0c87"]
+
+[ext_resource type="Texture2D" uid="uid://0sw6ow18dxbu" path="res://graphics/sphere.png" id="1_4dt55"]
+
+[sub_resource type="Curve" id="Curve_4dt55"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_g4v7s"]
+viewport_path = NodePath("SubViewport1")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4dt55"]
+viewport_path = NodePath("SubViewport2")
+
+[node name="ParallaxSky" type="Parallax2D" unique_id=378216296]
+z_index = -2
+scale = Vector2(1.25, 1.25)
+scroll_scale = Vector2(1, 0.2)
+repeat_size = Vector2(512, 0)
+repeat_times = 3
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=968947778]
+offset_left = -44.8
+offset_top = -422.0
+offset_right = 34.399998
+offset_bottom = -136.40002
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=1349307467]
+transparent_bg = true
+size = Vector2i(90, 30)
+
+[node name="Particles1" type="CPUParticles2D" parent="SubViewport2" unique_id=2044965370]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles2" type="CPUParticles2D" parent="SubViewport2" unique_id=482937139]
+position = Vector2(5, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles3" type="CPUParticles2D" parent="SubViewport2" unique_id=581550567]
+position = Vector2(9.999999, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles4" type="CPUParticles2D" parent="SubViewport2" unique_id=49546353]
+position = Vector2(15, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles5" type="CPUParticles2D" parent="SubViewport2" unique_id=1938494989]
+position = Vector2(19.999998, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles6" type="CPUParticles2D" parent="SubViewport2" unique_id=964564858]
+position = Vector2(25, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles7" type="CPUParticles2D" parent="SubViewport2" unique_id=484979157]
+position = Vector2(29.999998, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles8" type="CPUParticles2D" parent="SubViewport2" unique_id=1200614004]
+position = Vector2(35, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles9" type="CPUParticles2D" parent="SubViewport2" unique_id=871725410]
+position = Vector2(39.999996, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles10" type="CPUParticles2D" parent="SubViewport2" unique_id=777108903]
+position = Vector2(45, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles11" type="CPUParticles2D" parent="SubViewport2" unique_id=453807902]
+position = Vector2(49.999996, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles12" type="CPUParticles2D" parent="SubViewport2" unique_id=1137271162]
+position = Vector2(55, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles13" type="CPUParticles2D" parent="SubViewport2" unique_id=1815206254]
+position = Vector2(59.999996, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles14" type="CPUParticles2D" parent="SubViewport2" unique_id=638835898]
+position = Vector2(65, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles15" type="CPUParticles2D" parent="SubViewport2" unique_id=164781708]
+position = Vector2(69.99999, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles16" type="CPUParticles2D" parent="SubViewport2" unique_id=542663599]
+position = Vector2(75, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles17" type="CPUParticles2D" parent="SubViewport2" unique_id=343606838]
+position = Vector2(7.5, -12.5)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles18" type="CPUParticles2D" parent="SubViewport2" unique_id=1983823501]
+position = Vector2(27.5, -12.5)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles19" type="CPUParticles2D" parent="SubViewport2" unique_id=1698224307]
+position = Vector2(47, -12)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="Particles20" type="CPUParticles2D" parent="SubViewport2" unique_id=435451899]
+position = Vector2(67, -12)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.2784314, 0.23137255, 0.47058824, 1)
+
+[node name="ColorRect1" type="ColorRect" parent="." unique_id=1937904591]
+offset_left = -44.799995
+offset_top = -115.99997
+offset_right = 34.4
+offset_bottom = 169.6
+color = Color(0.3019608, 0.6509804, 1, 1)
+
+[node name="SubViewport1" type="SubViewport" parent="." unique_id=586484769]
+transparent_bg = true
+size = Vector2i(90, 30)
+
+[node name="Particles1" type="CPUParticles2D" parent="SubViewport1" unique_id=1187164529]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles2" type="CPUParticles2D" parent="SubViewport1" unique_id=943381274]
+position = Vector2(5, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles3" type="CPUParticles2D" parent="SubViewport1" unique_id=935258444]
+position = Vector2(9.999999, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles4" type="CPUParticles2D" parent="SubViewport1" unique_id=735243334]
+position = Vector2(15, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles5" type="CPUParticles2D" parent="SubViewport1" unique_id=1751577494]
+position = Vector2(19.999998, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles6" type="CPUParticles2D" parent="SubViewport1" unique_id=1247672084]
+position = Vector2(25, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles7" type="CPUParticles2D" parent="SubViewport1" unique_id=520816904]
+position = Vector2(29.999998, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles8" type="CPUParticles2D" parent="SubViewport1" unique_id=1193170479]
+position = Vector2(35, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles9" type="CPUParticles2D" parent="SubViewport1" unique_id=1306545656]
+position = Vector2(39.999996, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles10" type="CPUParticles2D" parent="SubViewport1" unique_id=303651093]
+position = Vector2(45, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles11" type="CPUParticles2D" parent="SubViewport1" unique_id=1815433341]
+position = Vector2(49.999996, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles12" type="CPUParticles2D" parent="SubViewport1" unique_id=1813466970]
+position = Vector2(55, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles13" type="CPUParticles2D" parent="SubViewport1" unique_id=1296614571]
+position = Vector2(59.999996, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles14" type="CPUParticles2D" parent="SubViewport1" unique_id=1744186822]
+position = Vector2(65, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles15" type="CPUParticles2D" parent="SubViewport1" unique_id=1864183045]
+position = Vector2(69.99999, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles16" type="CPUParticles2D" parent="SubViewport1" unique_id=1709132056]
+position = Vector2(75, 0)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles17" type="CPUParticles2D" parent="SubViewport1" unique_id=1148010231]
+position = Vector2(7.5, -12.5)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles18" type="CPUParticles2D" parent="SubViewport1" unique_id=432235833]
+position = Vector2(27.5, -12.5)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles19" type="CPUParticles2D" parent="SubViewport1" unique_id=1367218472]
+position = Vector2(47, -12)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Particles20" type="CPUParticles2D" parent="SubViewport1" unique_id=747614216]
+position = Vector2(67, -12)
+scale = Vector2(3.7499998, 3.7499998)
+texture = ExtResource("1_4dt55")
+local_coords = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+damping_min = 20.0
+damping_max = 20.0
+scale_amount_curve = SubResource("Curve_4dt55")
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Sprite1" type="Sprite2D" parent="." unique_id=124553464]
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1700813304]
+offset_left = -44.800003
+offset_top = -144.0
+offset_right = 34.399994
+offset_bottom = -13.600006
+color = Color(0.29411766, 0.35686275, 0.67058825, 1)
+
+[node name="Sprite2" type="Sprite2D" parent="." unique_id=234803980]
+position = Vector2(0, -130)
+scale = Vector2(0.9999998, 0.9999998)
+texture = SubResource("ViewportTexture_4dt55")
