@@ -7,11 +7,17 @@ func _ready() -> void:
 	NetworkHandler.join_lobby_result.connect(_on_join_lobby_result)
 	visibility_changed.connect(_on_visibility_changed)
 
-	#_load_preview_lobbies() # test of lobby list
+	_load_preview_lobbies() # test of lobby list
+
+func _exit_tree() -> void:
+	if NetworkHandler.lobby_list_received.is_connected(_on_lobby_list_received):
+		NetworkHandler.lobby_list_received.disconnect(_on_lobby_list_received)
+	if NetworkHandler.join_lobby_result.is_connected(_on_join_lobby_result):
+		NetworkHandler.join_lobby_result.disconnect(_on_join_lobby_result)
 
 func _on_visibility_changed() -> void:
-	if visible and multiplayer.has_multiplayer_peer():
-		NetworkHandler.rpc_id(1, "request_lobby_list")
+	if visible:
+		NetworkHandler.fetch_lobby_list()
 
 func _load_preview_lobbies() -> void:
 	_on_lobby_list_received([
@@ -107,7 +113,7 @@ func _on_lobby_list_received(lobby_list: Array) -> void:
 				if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 					item_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 					if multiplayer.has_multiplayer_peer():
-						NetworkHandler.rpc_id(1, "request_join_lobby", room_id)
+						NetworkHandler.join_lobby(room_id)
 			)
 
 		lobby_list_container.add_child(item_bg)

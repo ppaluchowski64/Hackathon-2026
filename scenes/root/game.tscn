@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://6jkm04mv4k86" path="res://graphics/tile.png" id="1_7dpn4"]
 [ext_resource type="Script" uid="uid://cj4xfpq1jl3u1" path="res://scripts/game.gd" id="1_ncd4d"]
-[ext_resource type="PackedScene" uid="uid://cqtrr1eu47rgl" path="res://scenes/player.tscn" id="1_rf1xt"]
 [ext_resource type="PackedScene" uid="uid://xoum1a1s0c87" path="res://scenes/parallax_sky.tscn" id="2_55u7g"]
 [ext_resource type="Texture2D" uid="uid://d1arugij2o0pm" path="res://graphics/bg2.png" id="2_o8yes"]
 [ext_resource type="Texture2D" uid="uid://0sw6ow18dxbu" path="res://graphics/sphere.png" id="2_xw82j"]
