@@ -17,6 +17,8 @@ var exhaustion: float = 0
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var gouda_sprite: Sprite2D = $GoudaSprite
 @onready var audio_gouda: AudioStreamPlayer = $AudioStreamPlayerGouda
+@onready var audio_grapple: AudioStreamPlayer = $AudioStreamPlayerGrapple
+@onready var audio_exhaust: AudioStreamPlayer = $AudioStreamPlayerExhaust
 
 @onready var collectable_sprite: Sprite2D = $CollectableRoot/CollectableSprite
 var spring_strength: float = 1
@@ -66,6 +68,7 @@ func exhaust() -> void:
 	is_exhausted = true
 	is_grappling = false
 	sprite.frame = 1
+	audio_exhaust.play()
 	await get_tree().create_timer(2).timeout
 	is_exhausted = false
 	sprite.frame = 0
@@ -98,6 +101,9 @@ func _physics_process(delta: float) -> void:
 	if grapple.get_overlapping_bodies() and Input.is_action_just_pressed("grapple") and not is_stunned and not is_exhausted and get_local_mouse_position().length_squared() <= reach ** 2:
 		is_grappling = true
 		grapple_pos = get_global_mouse_position()
+		
+		audio_grapple.pitch_scale = randf_range(0.8, 1.2)
+		audio_grapple.play()
 	
 	if Input.is_action_just_released("grapple"):
 		is_grappling = false
