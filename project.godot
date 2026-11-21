@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 NetworkHandler="*uid://c5xj0107gee3s"
 Fullscreen="*uid://dct1x5n31cpjl"
 
-
 [display]
 
 window/size/viewport_width=960
