@@ -5,7 +5,7 @@ extends Node2D
 func _draw() -> void:
 	if not player.is_grappling:
 		return
-	
+
 	draw_line(Vector2(-8, 5).rotated(player.global_rotation), player.grapple_pos - player.position, Color("#000000"), 10)
 	draw_line(Vector2(-8, 5).rotated(player.global_rotation), player.grapple_pos - player.position, Color("#8a423a"), 8)
 

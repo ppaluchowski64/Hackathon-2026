@@ -6,6 +6,49 @@ func _ready() -> void:
 	NetworkHandler.lobby_list_received.connect(_on_lobby_list_received)
 	NetworkHandler.join_lobby_result.connect(_on_join_lobby_result)
 
+	"""
+	var item_bg := PanelContainer.new()
+	item_bg.name = "LobbyListItemBackground"
+	item_bg.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var margin := MarginContainer.new()
+	margin.name = "MarginContainer"
+	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	margin.add_theme_constant_override("margin_left", 12)
+	margin.add_theme_constant_override("margin_right", 12)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_bottom", 8)
+	item_bg.add_child(margin)
+
+	var lobby_container := HBoxContainer.new()
+	lobby_container.name = "LobbyContainer"
+	lobby_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	margin.add_child(lobby_container)
+
+	var name_container := HBoxContainer.new()
+	name_container.name = "LobbyNameContainer"
+	name_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lobby_container.add_child(name_container)
+
+	var name_label := Label.new()
+	name_label.name = "LobbyNameLabel"
+	name_label.text = "Lobby"
+	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	name_container.add_child(name_label)
+
+	var count_container := HBoxContainer.new()
+	count_container.name = "PlayerCountContainer"
+	count_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lobby_container.add_child(count_container)
+
+	var count_label := Label.new()
+	count_label.name = "PlayerCountLabel"
+	count_label.text = "IN GAME"
+	count_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	count_container.add_child(count_label)
+	lobby_list_container.add_child(item_bg)
+	"""
+
 func _on_lobby_list_received(lobby_list: Array) -> void:
 	for child in lobby_list_container.get_children():
 		child.queue_free()
