@@ -25,15 +25,15 @@ height = 26.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qhqgy"]
-properties/0/path = NodePath(".:rotation")
+properties/0/path = NodePath(".:sync_rotation")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath(".:position")
+properties/1/path = NodePath(".:sync_position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 properties/2/path = NodePath(".:player_nickname")
 properties/2/spawn = true
-properties/2/replication_mode = 1
+properties/2/replication_mode = 2
 
 [node name="Player" type="RigidBody2D" unique_id=515138175]
 z_index = 1
@@ -103,6 +103,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1771761646]
+public_visibility = false
 replication_config = SubResource("SceneReplicationConfig_qhqgy")
 
 [node name="DangerTimer" type="Timer" parent="." unique_id=1747509474]

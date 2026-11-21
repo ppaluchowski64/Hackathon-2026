@@ -1,25 +1,30 @@
 extends Node2D
 
-@onready var player_scene: PackedScene = preload("res://scenes/player.tscn")
+const PLAYER_SCENE: PackedScene = preload("res://scenes/player.tscn")
 
 @onready var camera: Camera2D = $Camera2D
 @onready var tilemap: TileMapLayer = $TileMapLayer
-@onready var lobby: CanvasLayer = $Lobby
+@onready var lobby: Lobby = $Lobby
+@onready var players_root: Node2D = $Players
+@onready var ui = $UI
+@onready var stamina_bar = $UI/StaminaBar
 
 @export var collectables: CollectableSpawner
 
 @onready var spawn_points: Array[Marker2D] = [
-	$Lobby/MarginContainer/HBoxContainer/Control/Player1SpawnPoint,
-	$Lobby/MarginContainer/HBoxContainer/Control2/Player2SpawnPoint,
-	$Lobby/MarginContainer/HBoxContainer/Control3/Player3SpawnPoint,
-	$Lobby/MarginContainer/HBoxContainer/Control4/Player4SpawnPoint
+	$SpawnPoints/SpawnPoint1,
+	$SpawnPoints/SpawnPoint2,
+	$SpawnPoints/SpawnPoint3,
+	$SpawnPoints/SpawnPoint4
 ]
 
-var start_button: Button = null
 var game_started: bool = false
 var spawned_players: Dictionary = {}
 
 func _ready() -> void:
+	if not NetworkHandler.local_room_id.is_empty():
+		seed(NetworkHandler.lobby_seed)
+
 	tilemap.clear()
 
 	for i in range(3):
@@ -31,10 +36,13 @@ func _ready() -> void:
 
 	collectables.spawn(tilemap)
 
+	lobby.start_requested.connect(NetworkHandler.start_game)
 	NetworkHandler.lobby_updated.connect(_on_lobby_updated)
 	NetworkHandler.game_started.connect(_on_game_started)
 
-	_on_lobby_updated(NetworkHandler.peer_ids, NetworkHandler.player_names)
+	_on_lobby_updated(NetworkHandler.peer_ids, NetworkHandler.player_names, NetworkHandler.ready_peer_ids)
+
+	NetworkHandler.notify_scene_ready()
 
 func _exit_tree() -> void:
 	if NetworkHandler.lobby_updated.is_connected(_on_lobby_updated):
@@ -47,69 +55,49 @@ func _physics_process(delta: float) -> void:
 		return
 	camera.offset.y -= 30 * delta
 
-func _sync_host_start_button() -> void:
-	var should_have_button := NetworkHandler.is_lobby_host() and not game_started
-
-	if should_have_button:
-		if start_button == null or not is_instance_valid(start_button):
-			start_button = Button.new()
-			start_button.name = "StartButton"
-			start_button.text = "Start Game"
-			start_button.position = Vector2(20, 20) 
-			start_button.pressed.connect(_on_start_button_pressed)
-			lobby.add_child(start_button)
-		start_button.visible = true
-	elif start_button != null and is_instance_valid(start_button):
-		start_button.queue_free()
-		start_button = null
-
-func _on_lobby_updated(peer_ids: Array, player_names: Dictionary) -> void:
-	_sync_host_start_button()
-
+func _on_lobby_updated(peer_ids: Array, player_names: Dictionary, ready_peer_ids: Array) -> void:
 	for existing_id in spawned_players.keys():
 		if existing_id not in peer_ids:
 			if is_instance_valid(spawned_players[existing_id]):
 				spawned_players[existing_id].queue_free()
 			spawned_players.erase(existing_id)
 
-	for i in range(min(peer_ids.size(), spawn_points.size())):
+	for i in range(mini(peer_ids.size(), spawn_points.size())):
 		var peer_id: int = peer_ids[i]
-		var spawn_point: Marker2D = spawn_points[i]
-		var player_name: String = player_names.get(peer_id, "Player")
+		var spawn_position := players_root.to_local(spawn_points[i].global_position)
 
-		var player_instance: Node
-		if spawned_players.has(peer_id) and is_instance_valid(spawned_players[peer_id]):
-			player_instance = spawned_players[peer_id]
-		else:
-			player_instance = player_scene.instantiate()
-			player_instance.name = str(peer_id)
-			if player_instance is RigidBody2D:
-				player_instance.freeze = true
-			
-			var sync := player_instance.get_node_or_null("MultiplayerSynchronizer") as MultiplayerSynchronizer
-			if sync:
-				sync.public_visibility = false
-				sync.set_process(false)
-				sync.set_physics_process(false)
+		if not spawned_players.has(peer_id):
+			spawned_players[peer_id] = _spawn_player(peer_id, spawn_position)
 
-			spawn_point.add_child(player_instance)
-			spawned_players[peer_id] = player_instance
+		var player = spawned_players[peer_id]
+		if not is_instance_valid(player):
+			continue
 
-		if player_instance.get_parent() != spawn_point:
-			player_instance.reparent(spawn_point)
+		player.player_nickname = player_names.get(peer_id, "Player")
+		player.set_sync_peers(ready_peer_ids)
 
-		player_instance.position = Vector2.ZERO
-		if "player_nickname" in player_instance:
-			player_instance.player_nickname = player_name
+		if not game_started and player.is_multiplayer_authority():
+			player.place_at(spawn_position)
 
-func _on_start_button_pressed() -> void:
-	start_button.disabled = true
-	lobby.visible = false
-	for player_instance in spawned_players.values():
-		if is_instance_valid(player_instance) and player_instance is RigidBody2D:
-			player_instance.freeze = false
+	lobby.refresh(NetworkHandler.is_lobby_host(), ready_peer_ids.size() >= peer_ids.size())
 
+func _spawn_player(peer_id: int, spawn_position: Vector2) -> Player:
+	var player := PLAYER_SCENE.instantiate() as Player
+	player.name = str(peer_id)
+	player.position = spawn_position
+	player.set_multiplayer_authority(peer_id)
+	players_root.add_child(player)
+
+	if peer_id == multiplayer.get_unique_id():
+		ui.player = player
+		stamina_bar.player = player
+
+	return player
 
 func _on_game_started() -> void:
 	game_started = true
-	
+	lobby.hide()
+
+	for player in spawned_players.values():
+		if is_instance_valid(player):
+			player.activate()

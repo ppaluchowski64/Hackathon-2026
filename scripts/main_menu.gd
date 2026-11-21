@@ -15,11 +15,13 @@ func _on_player_name_input_text_submitted(new_nickname: String) -> void:
 	NetworkHandler.local_nickname = new_nickname
 
 func _on_create_lobby_button_pressed() -> void:
+	NetworkHandler.local_nickname = player_name_input.text
 	button_container.hide()
 	player_name_input_container.hide()
 	create_lobby.show()
 
 func _on_join_lobby_button_pressed() -> void:
+	NetworkHandler.local_nickname = player_name_input.text
 	button_container.hide()
 	player_name_input_container.hide()
 	lobby_list.show()
