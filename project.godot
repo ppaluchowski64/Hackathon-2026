@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Hackathon 2026"
 config/description="This game is made for Hackathon 2026"
-run/main_scene="res://scenes/root/game.tscn"
+run/main_scene="uid://dhg8oenlnrmsd"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 

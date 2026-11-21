@@ -7,7 +7,7 @@ func _ready() -> void:
 	NetworkHandler.join_lobby_result.connect(_on_join_lobby_result)
 	visibility_changed.connect(_on_visibility_changed)
 
-	_load_preview_lobbies() # test of lobby list
+	# _load_preview_lobbies() # test of lobby list
 
 func _exit_tree() -> void:
 	if NetworkHandler.lobby_list_received.is_connected(_on_lobby_list_received):
