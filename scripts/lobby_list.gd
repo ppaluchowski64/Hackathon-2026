@@ -64,7 +64,7 @@ func _on_lobby_list_received(lobby_list: Array) -> void:
 		
 		if is_joinable:
 			item_bg.gui_input.connect(func(event: InputEvent):
-				if event is InputEventMouse and event.is_pressed():
+				if event is InputEventMouse and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 					item_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 					NetworkHandler.rpc_id(1, "request_join_lobby", room_id)
 			)

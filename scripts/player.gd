@@ -8,6 +8,12 @@ var grapple_pos: Vector2
 var stamina: float = 100
 var exhaustion: float = 0
 
+@export var player_nickname: String:
+	set(value):
+		player_nickname = value
+		if has_node("Nickname"):
+			$Nickname.text = value
+
 func _physics_process(delta: float) -> void:
 	grapple.global_rotation = 0
 	

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://ce72ern7axing"]
+
+[node name="Lobby" type="CanvasLayer" unique_id=2054422290]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=829174932]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1582967468]
+layout_mode = 2
+theme_override_constants/separation = 225
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=624290978]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Player1SpawnPoint" type="Marker2D" parent="MarginContainer/HBoxContainer/Control" unique_id=207309250]
+
+[node name="Control2" type="Control" parent="MarginContainer/HBoxContainer" unique_id=2130385498]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Player2SpawnPoint" type="Marker2D" parent="MarginContainer/HBoxContainer/Control2" unique_id=1468353368]
+position = Vector2(-4, 0)
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1861814964]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="MarginContainer/HBoxContainer" unique_id=206284488]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Player3SpawnPoint" type="Marker2D" parent="MarginContainer/HBoxContainer/Control3" unique_id=376933471]
+
+[node name="Control4" type="Control" parent="MarginContainer/HBoxContainer" unique_id=266960715]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Player4SpawnPoint" type="Marker2D" parent="MarginContainer/HBoxContainer/Control4" unique_id=854481567]
