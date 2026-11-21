@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cf4qyrwm28265"]
+
+[ext_resource type="Texture2D" uid="uid://ccd4lifm5x6r2" path="res://icon.svg" id="1_4kkau"]
+[ext_resource type="Script" uid="uid://dv75m4pspcqov" path="res://scripts/bomb.gd" id="1_vpdcx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vpdcx"]
+friction = 0.2
+bounce = 0.8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 13.038404
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+radius = 80.0
+
+[node name="Bomb" type="RigidBody2D" unique_id=42154826]
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_vpdcx")
+script = ExtResource("1_vpdcx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1418257070]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_4kkau")
+
+[node name="Label" type="Label" parent="." unique_id=979244556]
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 10.0
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1704157876]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1841676271]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1039746956]
+shape = SubResource("CircleShape2D_yf5fn")

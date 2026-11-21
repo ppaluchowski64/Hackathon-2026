@@ -33,7 +33,7 @@ func initialize_server() -> void:
 	multiplayer.multiplayer_peer = multiplayer_peer
 
 	multiplayer_peer.peer_connected.connect(
-		func(new_peer_id: int):
+		func(_new_peer_id: int):
 			rpc_id(1, "request_lobby_list")
 	)
 

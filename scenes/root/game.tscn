@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://poin0bgm1qle" path="res://scripts/tilemap_draw.gd" id="6_3rh43"]
 [ext_resource type="Script" uid="uid://cnxn11tqbnky" path="res://scripts/stamina_bar.gd" id="6_bq78c"]
 [ext_resource type="Texture2D" uid="uid://qhwekn3uhgyn" path="res://graphics/ground.png" id="9_86ske"]
+[ext_resource type="Script" uid="uid://c45hcyr5c7uhf" path="res://scripts/collectable_spawner.gd" id="11_l77qo"]
 
 [sub_resource type="Curve" id="Curve_xw82j"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.77528, 0.0, 0, 0]
@@ -76,8 +77,9 @@ pattern_4 = SubResource("TileMapPattern_1qygq")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 distance = -64.0
 
-[node name="Game" type="Node2D" unique_id=1841285064]
+[node name="Game" type="Node2D" unique_id=1841285064 node_paths=PackedStringArray("collectables")]
 script = ExtResource("1_ncd4d")
+collectables = NodePath("Collectables")
 
 [node name="ParallaxParticles" type="Parallax2D" parent="." unique_id=115073641]
 z_index = 3
@@ -142,7 +144,7 @@ scroll_offset = Vector2(8, -24)
 [node name="ForegroundDraw" type="Node2D" parent="ParallaxForeground" unique_id=87290864]
 script = ExtResource("4_ijxjl")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1374132298]
+[node name="GroundSprite" type="Sprite2D" parent="." unique_id=1374132298]
 position = Vector2(0, 140)
 texture = ExtResource("9_86ske")
 
@@ -155,6 +157,9 @@ foreground_draw = NodePath("../ParallaxForeground/ForegroundDraw")
 
 [node name="TileMapDraw" type="Node2D" parent="." unique_id=1295590395]
 script = ExtResource("6_3rh43")
+
+[node name="Collectables" type="Node2D" parent="." unique_id=1243219941]
+script = ExtResource("11_l77qo")
 
 [node name="Player" parent="." unique_id=515138175 instance=ExtResource("1_rf1xt")]
 position = Vector2(-120, 0)

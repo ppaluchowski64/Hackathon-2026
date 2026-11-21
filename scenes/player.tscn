@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cqmwjdpijn7h2" path="res://graphics/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c11ir3jjflvvf" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://dml8jct682rd0" path="res://scripts/arm_draw.gd" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bx07rjmtsrkjq" path="res://graphics/collactables.png" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dap63lcv0v5b7" path="res://scripts/arm_collectable_draw.gd" id="4_qlg0r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qhqgy"]
 friction = 0.5
@@ -63,6 +65,16 @@ shape = SubResource("CircleShape2D_yf5fn")
 [node name="ArmDraw" type="Node2D" parent="." unique_id=730564773]
 z_index = -1
 script = ExtResource("3_qhqgy")
+
+[node name="ArmCollectableDraw" type="Node2D" parent="." unique_id=1887557947]
+script = ExtResource("4_qlg0r")
+
+[node name="CollectableRoot" type="Node" parent="." unique_id=832719305]
+
+[node name="CollectableSprite" type="Sprite2D" parent="CollectableRoot" unique_id=1336151376]
+z_index = 1
+texture = ExtResource("4_dqkch")
+hframes = 4
 
 [node name="PlayerName" type="Label" parent="." unique_id=606389192]
 custom_maximum_size = Vector2(-1, 16)
