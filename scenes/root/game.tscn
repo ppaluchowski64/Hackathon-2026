@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://c45hcyr5c7uhf" path="res://scripts/collectable_spawner.gd" id="11_l77qo"]
 [ext_resource type="Script" uid="uid://c2jl78hi3yv4r" path="res://scripts/ui.gd" id="13_836xp"]
 [ext_resource type="AudioStream" uid="uid://cis48pf4ooto" path="res://audio/soundtrack/game.wav" id="14_l77qo"]
+[ext_resource type="Texture2D" uid="uid://bjmckoeq2c6ne" path="res://graphics/story.png" id="15_s3lrj"]
+[ext_resource type="PackedScene" uid="uid://cyebv38625ekf" path="res://scenes/button.tscn" id="17_sh5j3"]
 
 [sub_resource type="Curve" id="Curve_xw82j"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.77528, 0.0, 0, 0]
@@ -224,6 +226,15 @@ horizontal_alignment = 1
 vertical_alignment = 2
 metadata/_edit_lock_ = true
 
+[node name="StorySprite" type="Sprite2D" parent="UI" unique_id=1257976378 groups=["story"]]
+visible = false
+position = Vector2(480, 276)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("15_s3lrj")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=248460320]
 stream = ExtResource("14_l77qo")
 autoplay = true
+
+[node name="Button" parent="." unique_id=1513311356 instance=ExtResource("17_sh5j3")]
+position = Vector2(0, -950)

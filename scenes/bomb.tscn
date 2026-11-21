@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cf4qyrwm28265"]
 
-[ext_resource type="Texture2D" uid="uid://ccd4lifm5x6r2" path="res://icon.svg" id="1_4kkau"]
 [ext_resource type="Script" uid="uid://dv75m4pspcqov" path="res://scripts/bomb.gd" id="1_vpdcx"]
+[ext_resource type="Texture2D" uid="uid://bx07rjmtsrkjq" path="res://graphics/collactables.png" id="2_vpdcx"]
+[ext_resource type="AudioStream" uid="uid://dd038rs7kq2k7" path="res://audio/sfx/bomb_tick.wav" id="3_84slv"]
+[ext_resource type="AudioStream" uid="uid://3khk2c8abf5r" path="res://audio/sfx/bomb_explode.wav" id="4_nxi8k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vpdcx"]
 friction = 0.2
@@ -20,8 +22,9 @@ physics_material_override = SubResource("PhysicsMaterial_vpdcx")
 script = ExtResource("1_vpdcx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1418257070]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_4kkau")
+texture = ExtResource("2_vpdcx")
+hframes = 4
+frame = 1
 
 [node name="Label" type="Label" parent="." unique_id=979244556]
 offset_left = -20.0
@@ -39,3 +42,9 @@ shape = SubResource("CircleShape2D_g4v7s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1039746956]
 shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="AudioStreamPlayerTick" type="AudioStreamPlayer" parent="." unique_id=1637596487]
+stream = ExtResource("3_84slv")
+
+[node name="AudioStreamPlayerExplode" type="AudioStreamPlayer" parent="." unique_id=830409369]
+stream = ExtResource("4_nxi8k")

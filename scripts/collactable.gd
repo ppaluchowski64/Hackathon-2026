@@ -10,7 +10,7 @@ static func instantiate() -> Collectable:
 var anim: float = 0
 
 enum Type {NULL = -1, ROPE, BOMB, SLAP, GOUDA}
-var type: Type = randi_range(0, 2) as Type
+var type: Type = randi_range(0, 3) as Type
 
 func _ready() -> void:
 	sprite.frame = type
