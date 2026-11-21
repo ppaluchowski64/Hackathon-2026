@@ -1,19 +1,77 @@
 [gd_scene format=3 uid="uid://cq2aqbvisv2x0"]
 
-[ext_resource type="Texture2D" uid="uid://ccd4lifm5x6r2" path="res://icon.svg" id="1_icxtj"]
+[ext_resource type="Texture2D" uid="uid://d7u3ri8hejke" path="res://graphics/rope.png" id="2_ghbyf"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
-height = 110.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghbyf"]
+size = Vector2(14, 32)
 
 [node name="Rope" type="StaticBody2D" unique_id=1543077156]
 z_index = -1
 collision_layer = 4
 collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560237664]
-position = Vector2(9.536743e-07, -9.536743e-07)
-scale = Vector2(0.1484375, 0.796875)
-texture = ExtResource("1_icxtj")
+[node name="Segment1" type="StaticBody2D" parent="." unique_id=2049271011]
+position = Vector2(0, -48)
+collision_layer = 4
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2122271770]
-shape = SubResource("CapsuleShape2D_g4v7s")
+[node name="Sprite2D" type="Sprite2D" parent="Segment1" unique_id=1823279451]
+texture = ExtResource("2_ghbyf")
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment1" unique_id=10076673]
+shape = SubResource("RectangleShape2D_ghbyf")
+
+[node name="Segment2" type="RigidBody2D" parent="." unique_id=1887662648]
+position = Vector2(0, -16)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment2" unique_id=351357548]
+texture = ExtResource("2_ghbyf")
+vframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment2" unique_id=2122271770]
+shape = SubResource("RectangleShape2D_ghbyf")
+
+[node name="Segment3" type="RigidBody2D" parent="." unique_id=176609985]
+position = Vector2(0, 16)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment3" unique_id=1311865403]
+texture = ExtResource("2_ghbyf")
+vframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment3" unique_id=774784705]
+shape = SubResource("RectangleShape2D_ghbyf")
+
+[node name="Segment4" type="RigidBody2D" parent="." unique_id=2040827654]
+position = Vector2(0, 48)
+collision_layer = 4
+collision_mask = 0
+constant_force = Vector2(-100, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment4" unique_id=2124159586]
+texture = ExtResource("2_ghbyf")
+vframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment4" unique_id=76178266]
+shape = SubResource("RectangleShape2D_ghbyf")
+
+[node name="Joint1" type="PinJoint2D" parent="." unique_id=1782993941]
+position = Vector2(0, -32)
+node_a = NodePath("../Segment1")
+node_b = NodePath("../Segment2")
+
+[node name="Joint2" type="PinJoint2D" parent="." unique_id=1542045448]
+node_a = NodePath("../Segment2")
+node_b = NodePath("../Segment3")
+
+[node name="Joint3" type="PinJoint2D" parent="." unique_id=509796780]
+position = Vector2(0, 32)
+node_a = NodePath("../Segment3")
+node_b = NodePath("../Segment4")

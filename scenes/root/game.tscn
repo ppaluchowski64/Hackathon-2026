@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://cnxn11tqbnky" path="res://scripts/stamina_bar.gd" id="6_bq78c"]
 [ext_resource type="Texture2D" uid="uid://qhwekn3uhgyn" path="res://graphics/ground.png" id="9_86ske"]
 [ext_resource type="Script" uid="uid://c45hcyr5c7uhf" path="res://scripts/collectable_spawner.gd" id="11_l77qo"]
+[ext_resource type="Script" uid="uid://c2jl78hi3yv4r" path="res://scripts/ui.gd" id="13_836xp"]
+[ext_resource type="AudioStream" uid="uid://cis48pf4ooto" path="res://audio/soundtrack/game.wav" id="14_l77qo"]
 
 [sub_resource type="Curve" id="Curve_xw82j"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.77528, 0.0, 0, 0]
@@ -164,7 +166,7 @@ script = ExtResource("11_l77qo")
 [node name="Player" parent="." unique_id=515138175 instance=ExtResource("1_rf1xt")]
 position = Vector2(-120, 0)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=906975302]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=906975302 groups=["camera"]]
 zoom = Vector2(1.75, 1.75)
 process_callback = 0
 
@@ -175,8 +177,53 @@ collision_mask = 7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=509856899]
 shape = SubResource("WorldBoundaryShape2D_g4v7s")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=928463574]
+[node name="UI" type="CanvasLayer" parent="." unique_id=928463574 node_paths=PackedStringArray("player")]
+script = ExtResource("13_836xp")
+player = NodePath("../Player")
 
 [node name="StaminaBar" type="Node2D" parent="UI" unique_id=529904689 node_paths=PackedStringArray("player")]
 script = ExtResource("6_bq78c")
 player = NodePath("../../Player")
+
+[node name="ReachLabel" type="Label" parent="UI" unique_id=1593284010]
+offset_left = 190.0
+offset_top = 86.0
+offset_right = 490.0
+offset_bottom = 102.0
+text = "reach: 400"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeightLabel" type="Label" parent="UI" unique_id=1371456423]
+offset_left = 484.0
+offset_top = 86.0
+offset_right = 784.0
+offset_bottom = 102.0
+text = "height: 400"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=1063462036]
+offset_left = 169.0
+offset_top = 459.0
+offset_right = 786.0
+offset_bottom = 509.0
+
+[node name="NotionLabel" type="Label" parent="UI/ColorRect" unique_id=376202643]
+custom_maximum_size = Vector2(-1, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.45, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "out of reach! get back in 3"
+horizontal_alignment = 1
+vertical_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=248460320]
+stream = ExtResource("14_l77qo")
+autoplay = true

@@ -14,4 +14,7 @@ func _draw() -> void:
 	draw_rect(Rect2((960 - size.x) / 2, 0, size.x * player.stamina / 100, size.y), Color("#8fde5d"))
 
 func _physics_process(_delta: float) -> void:
+	if not player:
+		return
+	
 	queue_redraw()

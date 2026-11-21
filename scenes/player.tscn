@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://dml8jct682rd0" path="res://scripts/arm_draw.gd" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://bx07rjmtsrkjq" path="res://graphics/collactables.png" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dap63lcv0v5b7" path="res://scripts/arm_collectable_draw.gd" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://v7on7vpfrmgc" path="res://scripts/reach_draw.gd" id="6_fjrip"]
+[ext_resource type="Script" uid="uid://dfhw374r63nie" path="res://scripts/lock_rotation.gd" id="6_tuyoq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qhqgy"]
 friction = 0.5
@@ -76,16 +78,22 @@ z_index = 1
 texture = ExtResource("4_dqkch")
 hframes = 4
 
-[node name="PlayerName" type="Label" parent="." unique_id=606389192]
+[node name="ReachDraw" type="Node2D" parent="." unique_id=659071675]
+script = ExtResource("6_fjrip")
+
+[node name="LabelRoot" type="Node2D" parent="." unique_id=2072574603]
+script = ExtResource("6_tuyoq")
+
+[node name="PlayerName" type="Label" parent="LabelRoot" unique_id=606389192]
 custom_maximum_size = Vector2(-1, 16)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -34.5
 offset_top = -42.0
-offset_right = 20.0
+offset_right = 34.5
 offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -96,3 +104,10 @@ vertical_alignment = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1771761646]
 replication_config = SubResource("SceneReplicationConfig_qhqgy")
+
+[node name="DangerTimer" type="Timer" parent="." unique_id=1747509474]
+wait_time = 4.0
+
+[node name="ExhaustionTimer" type="Timer" parent="." unique_id=1786374175]
+
+[connection signal="timeout" from="DangerTimer" to="." method="_on_danger_timer_timeout"]
