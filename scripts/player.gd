@@ -45,6 +45,14 @@ var is_gouda: bool = false
 	$CollisionGouda1, $CollisionGouda2
 ]
 
+var is_mobile: bool = false
+
+func _ready() -> void:
+	match OS.get_name():
+		"Android", "iOS":
+			is_mobile = true
+			mobile_button.visible = true
+
 func gouda() -> void:
 	is_gouda = true
 	sprite.visible = false
@@ -98,17 +106,25 @@ func _physics_process(delta: float) -> void:
 		stamina = clampf(stamina + delta * 4.5, 0, 100)
 		exhaustion = clampf(exhaustion - delta * 48, 0, 100)
 	
-	if grapple.get_overlapping_bodies() and Input.is_action_just_pressed("grapple") and not is_stunned and not is_exhausted and get_local_mouse_position().length_squared() <= reach ** 2:
-		is_grappling = true
-		grapple_pos = get_global_mouse_position()
-		
-		audio_grapple.pitch_scale = randf_range(0.8, 1.2)
-		audio_grapple.play()
+	if is_mobile:
+		if grapple.get_overlapping_bodies() and Input.is_action_just_pressed("grapple") and not is_stunned and not is_exhausted and get_local_mouse_position().length_squared() <= reach ** 2 and not mobile_use_collectable:
+			is_grappling = true
+			grapple_pos = get_global_mouse_position()
+			
+			audio_grapple.pitch_scale = randf_range(0.8, 1.2)
+			audio_grapple.play()
+	else:
+		if grapple.get_overlapping_bodies() and Input.is_action_just_pressed("grapple") and not is_stunned and not is_exhausted and get_local_mouse_position().length_squared() <= reach ** 2:
+			is_grappling = true
+			grapple_pos = get_global_mouse_position()
+			
+			audio_grapple.pitch_scale = randf_range(0.8, 1.2)
+			audio_grapple.play()
 	
 	if Input.is_action_just_released("grapple"):
 		is_grappling = false
 	
-	if Input.is_action_just_pressed("use_collectable"):
+	if Input.is_action_just_pressed("use_collectable") or is_mobile and Input.is_action_just_pressed("grapple") and mobile_use_collectable:
 		if collectable == Collectable.Type.ROPE:
 			var rope: StaticBody2D = preload("res://scenes/rope.tscn").instantiate()
 			rope.global_position = get_global_mouse_position() + Vector2(0, 48)
@@ -135,6 +151,8 @@ func _physics_process(delta: float) -> void:
 			gouda()
 			
 			collectable = Collectable.Type.NULL
+		
+		if is_mobile: _on_mobile_button_toggled(false)
 	
 	if stamina == 0:
 		exhaust()
@@ -157,3 +175,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_danger_timer_timeout() -> void:
 	get_tree().call_deferred("reload_current_scene")
+	
+@export var mobile_button: Button
+var mobile_use_collectable: bool = false
+func _on_mobile_button_toggled(toggled_on: bool) -> void:
+	mobile_use_collectable = toggled_on
+	mobile_button.text = "use item off" if toggled_on else "use item on"
+	

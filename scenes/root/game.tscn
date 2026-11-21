@@ -165,8 +165,9 @@ script = ExtResource("6_3rh43")
 [node name="Collectables" type="Node2D" parent="." unique_id=1243219941]
 script = ExtResource("11_l77qo")
 
-[node name="Player" parent="." unique_id=515138175 instance=ExtResource("1_rf1xt")]
+[node name="Player" parent="." unique_id=515138175 node_paths=PackedStringArray("mobile_button") instance=ExtResource("1_rf1xt")]
 position = Vector2(-120, 0)
+mobile_button = NodePath("../UI/MobileButton")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=906975302 groups=["camera"]]
 zoom = Vector2(1.75, 1.75)
@@ -240,9 +241,20 @@ position = Vector2(480, 276)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("15_s3lrj")
 
+[node name="MobileButton" type="Button" parent="UI" unique_id=1470648708]
+visible = false
+offset_left = -1.0
+offset_top = 417.0
+offset_right = 165.0
+offset_bottom = 516.0
+toggle_mode = true
+text = "use item on"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=248460320]
 stream = ExtResource("14_l77qo")
 autoplay = true
 
 [node name="Button" parent="." unique_id=1513311356 instance=ExtResource("17_sh5j3")]
 position = Vector2(0, -950)
+
+[connection signal="toggled" from="UI/MobileButton" to="Player" method="_on_mobile_button_toggled"]
