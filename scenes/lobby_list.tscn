@@ -23,5 +23,8 @@ text = "Lobbies"
 horizontal_alignment = 1
 
 [node name="LobbyListContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1942393975]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 6
 alignment = 1

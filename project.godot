@@ -11,14 +11,15 @@ config_version=5
 [application]
 
 config/name="Hackathon 2026"
+config/description="This game is made for Hackathon 2026"
 run/main_scene="res://scenes/root/game.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Fullscreen="*uid://dct1x5n31cpjl"
 NetworkHandler="*uid://c5xj0107gee3s"
+Fullscreen="*uid://dct1x5n31cpjl"
 
 [display]
 
@@ -26,6 +27,7 @@ window/size/viewport_width=960
 window/size/viewport_height=540
 window/size/sharp_corners=true
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [gui]
 
@@ -60,4 +62,5 @@ use_collectable={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
