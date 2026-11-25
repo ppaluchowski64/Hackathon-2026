@@ -131,6 +131,5 @@ func _on_join_lobby_result(success: bool, _message: String = "") -> void:
 	if success:
 		get_tree().change_scene_to_file("res://scenes/root/game.tscn")
 
-
 func _on_go_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

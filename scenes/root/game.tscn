@@ -165,10 +165,6 @@ script = ExtResource("6_3rh43")
 [node name="Collectables" type="Node2D" parent="." unique_id=1243219941]
 script = ExtResource("11_l77qo")
 
-[node name="Player" parent="." unique_id=515138175 node_paths=PackedStringArray("mobile_button") instance=ExtResource("1_rf1xt")]
-position = Vector2(-120, 0)
-mobile_button = NodePath("../UI/MobileButton")
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=906975302 groups=["camera"]]
 zoom = Vector2(1.75, 1.75)
 process_callback = 0
@@ -180,13 +176,11 @@ collision_mask = 7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=509856899]
 shape = SubResource("WorldBoundaryShape2D_g4v7s")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=928463574 node_paths=PackedStringArray("player")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=928463574]
 script = ExtResource("13_836xp")
-player = NodePath("")
 
-[node name="StaminaBar" type="Node2D" parent="UI" unique_id=529904689 node_paths=PackedStringArray("player")]
+[node name="StaminaBar" type="Node2D" parent="UI" unique_id=529904689]
 script = ExtResource("6_bq78c")
-player = NodePath("")
 
 [node name="ReachLabel" type="Label" parent="UI" unique_id=1593284010]
 offset_left = 190.0
@@ -257,4 +251,18 @@ autoplay = true
 [node name="Button" parent="." unique_id=1513311356 instance=ExtResource("17_sh5j3")]
 position = Vector2(0, -950)
 
-[connection signal="toggled" from="UI/MobileButton" to="Player" method="_on_mobile_button_toggled"]
+[node name="Lobby" parent="." unique_id=2054422290 instance=ExtResource("10_ijxjl")]
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1557239580 groups=["spawn_points"]]
+
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints" unique_id=312188394]
+position = Vector2(-250, 45)
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints" unique_id=894049027]
+position = Vector2(-150, 40)
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints" unique_id=1093503702]
+position = Vector2(160, 50)
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints" unique_id=1305834429]
+position = Vector2(250, 60)

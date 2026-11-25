@@ -175,6 +175,10 @@ func join_lobby_response(success: bool, msg: String, room_id: String, peers: Arr
 
 	join_lobby_result.emit(success, msg)
 
+@rpc("any_peer", "reliable")
+func request_start_game() -> void:
+	game_started.emit()
+
 func add_peer_to_room(peer_id: int, room_id: String, nickname: String) -> void:
 	var room = rooms[room_id]
 	room["peers"].append(peer_id)
@@ -194,6 +198,9 @@ func wait_until_connected() -> bool:
 		return can_send_to_server()
 	return false
 
+func is_lobby_host() -> bool:
+	return not peer_ids.is_empty() and peer_ids[0] == multiplayer.get_unique_id()
+
 # helper functions
 func create_lobby(lobby_name: String) -> void:
 	if await wait_until_connected():
@@ -206,3 +213,7 @@ func join_lobby(room_id: String) -> void:
 func fetch_lobby_list() -> void:
 	if await wait_until_connected():
 		rpc_id(1, "request_lobby_list")
+
+func start_game() -> void:
+	if await wait_until_connected():
+		rpc_id(1, "request_start_game")

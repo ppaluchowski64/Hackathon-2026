@@ -82,6 +82,9 @@ func exhaust() -> void:
 	sprite.frame = 0
 
 func _physics_process(delta: float) -> void:
+	if not get_multiplayer_authority():
+		return
+
 	grapple.global_rotation = 0
 	
 	reach = max(reach - 4 * delta, 200)

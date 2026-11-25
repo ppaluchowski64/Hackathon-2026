@@ -5,54 +5,19 @@
 [node name="Lobby" type="CanvasLayer" unique_id=2054422290]
 script = ExtResource("1_o1atq")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=829174932]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=330549546]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_right = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=330549546]
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1080588911]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1013463288]
-custom_minimum_size = Vector2(200, 0)
+[node name="StartGameButton" type="Button" parent="VBoxContainer" unique_id=1013463288]
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Start the Game"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1582967468]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 225
-
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=624290978]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Player1SpawnPoint" type="Marker2D" parent="MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=207309250]
-
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2130385498]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Player2SpawnPoint" type="Marker2D" parent="MarginContainer/VBoxContainer/HBoxContainer/Control2" unique_id=1468353368]
-
-[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1861814964]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=206284488]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Player3SpawnPoint" type="Marker2D" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=376933471]
-
-[node name="Control4" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=266960715]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Player4SpawnPoint" type="Marker2D" parent="MarginContainer/VBoxContainer/HBoxContainer/Control4" unique_id=854481567]

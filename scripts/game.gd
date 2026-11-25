@@ -8,14 +8,10 @@ extends Node2D
 
 @export var collectables: CollectableSpawner
 
-@onready var spawn_points: Array[Marker2D] = [
-	$Lobby/MarginContainer/HBoxContainer/Control/Player1SpawnPoint,
-	$Lobby/MarginContainer/HBoxContainer/Control2/Player2SpawnPoint,
-	$Lobby/MarginContainer/HBoxContainer/Control3/Player3SpawnPoint,
-	$Lobby/MarginContainer/HBoxContainer/Control4/Player4SpawnPoint
-]
+@onready var spawn_points: Array[Node] = get_spawn_points()
 
-var start_button: Button = null
+@onready var start_button: Button = $Lobby/VBoxContainer/StartGameButton
+
 var game_started: bool = false
 var spawned_players: Dictionary = {}
 
@@ -47,22 +43,18 @@ func _physics_process(delta: float) -> void:
 		return
 	camera.offset.y -= 30 * delta
 
+func get_spawn_points() -> Array[Node]:
+	var group_node := get_tree().get_first_node_in_group("spawn_points")
+	if group_node == null:
+		return []
+	return group_node.get_children()
+
 func _sync_host_start_button() -> void:
-	var should_have_button := NetworkHandler.is_lobby_host() and not game_started
-
+	var should_have_button: bool = NetworkHandler.is_lobby_host() and not game_started
+	start_button.visible = should_have_button
 	if should_have_button:
-		if start_button == null or not is_instance_valid(start_button):
-			start_button = Button.new()
-			start_button.name = "StartButton"
-			start_button.text = "Start Game"
-			start_button.position = Vector2(20, 20) 
-			start_button.pressed.connect(_on_start_button_pressed)
-			lobby.add_child(start_button)
-		start_button.visible = true
-	elif start_button != null and is_instance_valid(start_button):
-		start_button.queue_free()
-		start_button = null
-
+		start_button.pressed.connect(_on_start_button_pressed)
+	
 func _on_lobby_updated(peer_ids: Array, player_names: Dictionary) -> void:
 	_sync_host_start_button()
 
@@ -83,9 +75,10 @@ func _on_lobby_updated(peer_ids: Array, player_names: Dictionary) -> void:
 		else:
 			player_instance = player_scene.instantiate()
 			player_instance.name = str(peer_id)
+			player_instance.set_multiplayer_authority(peer_id)
 			if player_instance is RigidBody2D:
 				player_instance.freeze = true
-			
+
 			var sync := player_instance.get_node_or_null("MultiplayerSynchronizer") as MultiplayerSynchronizer
 			if sync:
 				sync.public_visibility = false
@@ -109,6 +102,7 @@ func _on_start_button_pressed() -> void:
 		if is_instance_valid(player_instance) and player_instance is RigidBody2D:
 			player_instance.freeze = false
 
+	NetworkHandler.start_game()
 
 func _on_game_started() -> void:
 	game_started = true
