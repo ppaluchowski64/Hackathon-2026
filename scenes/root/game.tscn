@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://c45hcyr5c7uhf" path="res://scripts/collectable_spawner.gd" id="11_l77qo"]
 [ext_resource type="Script" uid="uid://c2jl78hi3yv4r" path="res://scripts/ui.gd" id="13_836xp"]
 [ext_resource type="AudioStream" uid="uid://cis48pf4ooto" path="res://audio/soundtrack/game.wav" id="14_l77qo"]
+[ext_resource type="Texture2D" uid="uid://bjmckoeq2c6ne" path="res://graphics/story.png" id="15_s3lrj"]
+[ext_resource type="PackedScene" uid="uid://cyebv38625ekf" path="res://scenes/button.tscn" id="17_sh5j3"]
 
 [sub_resource type="Curve" id="Curve_xw82j"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.77528, 0.0, 0, 0]
@@ -163,6 +165,10 @@ script = ExtResource("6_3rh43")
 [node name="Collectables" type="Node2D" parent="." unique_id=1243219941]
 script = ExtResource("11_l77qo")
 
+[node name="Player" parent="." unique_id=515138175 node_paths=PackedStringArray("mobile_button") instance=ExtResource("1_rf1xt")]
+position = Vector2(-120, 0)
+mobile_button = NodePath("../UI/MobileButton")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=906975302 groups=["camera"]]
 zoom = Vector2(1.75, 1.75)
 process_callback = 0
@@ -221,8 +227,34 @@ horizontal_alignment = 1
 vertical_alignment = 2
 metadata/_edit_lock_ = true
 
+[node name="DarkenRect" type="ColorRect" parent="UI" unique_id=2142573889 groups=["story_rect"]]
+visible = false
+offset_left = -280.0
+offset_top = -145.0
+offset_right = 1304.0
+offset_bottom = 639.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="StorySprite" type="Sprite2D" parent="UI" unique_id=1257976378 groups=["story"]]
+visible = false
+position = Vector2(480, 276)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("15_s3lrj")
+
+[node name="MobileButton" type="Button" parent="UI" unique_id=1470648708]
+visible = false
+offset_left = -1.0
+offset_top = 417.0
+offset_right = 165.0
+offset_bottom = 516.0
+toggle_mode = true
+text = "use item on"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=248460320]
 stream = ExtResource("14_l77qo")
 autoplay = true
 
-[node name="Lobby" parent="." unique_id=2054422290 instance=ExtResource("10_ijxjl")]
+[node name="Button" parent="." unique_id=1513311356 instance=ExtResource("17_sh5j3")]
+position = Vector2(0, -950)
+
+[connection signal="toggled" from="UI/MobileButton" to="Player" method="_on_mobile_button_toggled"]

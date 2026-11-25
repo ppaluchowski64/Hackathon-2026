@@ -18,8 +18,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-NetworkHandler="*uid://c5xj0107gee3s"
 Fullscreen="*uid://dct1x5n31cpjl"
+NetworkHandler="*uid://c5xj0107gee3s"
+Global="*uid://brfxo57cinqtm"
 
 [display]
 
@@ -27,7 +28,11 @@ window/size/viewport_width=960
 window/size/viewport_height=540
 window/size/sharp_corners=true
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+
+[editor]
+
+movie_writer/video_quality=0.9
+movie_writer/movie_file="C:/Users/Euro/Documents/dev/games/common/Hackathon-2026/gameplay.avi"
 
 [gui]
 
