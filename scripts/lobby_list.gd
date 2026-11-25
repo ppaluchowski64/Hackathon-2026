@@ -16,11 +16,7 @@ func _exit_tree() -> void:
 		NetworkHandler.join_lobby_result.disconnect(_on_join_lobby_result)
 
 func _on_visibility_changed() -> void:
-<<<<<<< Updated upstream
-	if visible:
-=======
 	if visible and multiplayer.has_multiplayer_peer():
->>>>>>> Stashed changes
 		NetworkHandler.fetch_lobby_list()
 
 func _load_preview_lobbies() -> void:

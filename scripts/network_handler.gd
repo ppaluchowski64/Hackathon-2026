@@ -42,21 +42,17 @@ func initialize_server() -> void:
 
 	multiplayer_peer.peer_connected.connect(
 		func(_new_peer_id: int):
-<<<<<<< Updated upstream
-			pass
+			rpc_id(_new_peer_id, "receive_lobby_list", build_lobby_list())
 	)
 
 func join_client() -> void:
 	multiplayer_peer.create_client(ADDRESS, PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
-	
+
 	multiplayer.connected_to_server.connect(
 		func():
 			print("[Client Connected]")
 			rpc_id(1, "request_lobby_list")
-=======
-			rpc_id(_new_peer_id, "receive_lobby_list", build_lobby_list())
->>>>>>> Stashed changes
 	)
 
 @rpc("any_peer", "reliable")
@@ -94,13 +90,8 @@ func request_create_lobby(lobby_name: String, nickname: String) -> void:
 	rpc_id(sender_id, "join_lobby_response", true, "Lobby created!", room_id, room["peers"], room["names"])
 	broadcast_lobby_list()
 
-<<<<<<< Updated upstream
-func build_lobby_list() -> Array[Dictionary]:
-	var lobby_list: Array[Dictionary] = []
-=======
 func build_lobby_list() -> Array:
 	var lobby_list: Array = []
->>>>>>> Stashed changes
 
 	for room_id in rooms.keys():
 		var room = rooms[room_id]
@@ -114,17 +105,14 @@ func build_lobby_list() -> Array:
 
 	return lobby_list
 
-<<<<<<< Updated upstream
 func broadcast_lobby_list() -> void:
 	if not multiplayer.is_server():
 		return
-	
+
 	var lobby_list = build_lobby_list()
 	for peer_id in multiplayer.get_peers():
 		rpc_id(peer_id, "receive_lobby_list", lobby_list)
 
-=======
->>>>>>> Stashed changes
 @rpc("any_peer", "reliable")
 func request_lobby_list() -> void:
 	if not multiplayer.is_server():
@@ -189,15 +177,9 @@ func join_lobby_response(success: bool, msg: String, room_id: String, peers: Arr
 
 func add_peer_to_room(peer_id: int, room_id: String, nickname: String) -> void:
 	var room = rooms[room_id]
-<<<<<<< Updated upstream
 	room["peers"].append(peer_id)
 	room["names"][peer_id] = nickname
 	peer_to_room[peer_id] = room_id
-	
-=======
-	room["peers"].append(sender_id)
-	peer_to_room[sender_id] = room_id
->>>>>>> Stashed changes
 
 func can_send_to_server() -> bool:
 	if not multiplayer.has_multiplayer_peer() or multiplayer.is_server():
@@ -207,77 +189,20 @@ func can_send_to_server() -> bool:
 func wait_until_connected() -> bool:
 	if can_send_to_server():
 		return true
-<<<<<<< Updated upstream
-	if not multiplayer.has_multiplayer_peer() or multiplayer.is_server():
-		return false
-=======
->>>>>>> Stashed changes
 	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTING:
 		await multiplayer.connected_to_server
 		return can_send_to_server()
 	return false
 
-<<<<<<< Updated upstream
+# helper functions
 func create_lobby(lobby_name: String) -> void:
-	print("create lobby request")
 	if await wait_until_connected():
 		rpc_id(1, "request_create_lobby", lobby_name.strip_edges(), local_nickname)
-		print("can send to server")
 
 func join_lobby(room_id: String) -> void:
 	if await wait_until_connected():
 		rpc_id(1, "request_join_lobby", room_id, local_nickname)
-=======
-# helper functions
-func create_lobby(lobby_name: String) -> void:
-	if await wait_until_connected():
-		rpc_id(1, "request_create_lobby", lobby_name)
-
-func join_lobby(room_id: String) -> void:
-	if await wait_until_connected():
-		rpc_id(1, "request_join_lobby", room_id)
->>>>>>> Stashed changes
 
 func fetch_lobby_list() -> void:
 	if await wait_until_connected():
 		rpc_id(1, "request_lobby_list")
-<<<<<<< Updated upstream
-
-func is_lobby_host() -> bool:
-	return not peer_ids.is_empty() and peer_ids[0] == multiplayer.get_unique_id()
-
-func start_game() -> void:
-	if await wait_until_connected():
-		rpc_id(1, "request_start_game")
-
-@rpc("any_peer", "reliable")
-func request_start_game() -> void:
-	if not multiplayer.is_server():
-		return
-	
-	var sender_id = multiplayer.get_remote_sender_id()
-	
-	if not peer_to_room.has(sender_id):
-		return
-	
-	var room_id: String = peer_to_room[sender_id]
-	var room: Dictionary = rooms[room_id]
-
-	if room["peers"].is_empty() or room["peers"][0] != sender_id:
-		return
-	
-	if room["in_game"]:
-		return
-	
-	room["in_game"] = true
-	
-	for peer_id in room["peers"]:
-		rpc_id(peer_id, "receive_game_started")
-	
-	broadcast_lobby_list()
-
-@rpc("authority", "reliable")
-func receive_game_started() -> void:
-	game_started.emit()
-=======
->>>>>>> Stashed changes
