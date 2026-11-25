@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+<<<<<<< Updated upstream
 @onready var lobby_name_input = $VBoxContainer/LobbyNameInput
 
 func _ready() -> void:
@@ -25,3 +26,19 @@ func _on_back_button_pressed() -> void:
 
 func _on_create_lobby_button_pressed() -> void:
 	NetworkHandler.create_lobby(lobby_name_input.text)
+=======
+@onready var lobby_name_input: LineEdit = $VBoxContainer/VBoxContainer/LobbyNameInput
+
+func _on_lobby_name_input_text_submitted(new_lobby_name: String) -> void:
+	var clean_lobby_name = new_lobby_name.strip_edges()
+	NetworkHandler.rpc_id(1, "request_create_lobby", clean_lobby_name)
+	get_tree().change_scene_to_file("res://scenes/root/game.tscn")
+
+
+func _on_go_back_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+func _on_create_lobby_button_pressed() -> void:
+	rpc_id(1, "request_create_lobby", lobby_name_input.text)
+>>>>>>> Stashed changes

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d041al1rxost4"]
 
 [ext_resource type="Script" uid="uid://dgu0bhfe1jnfo" path="res://scripts/lobby_list.gd" id="1_dtt3s"]
+[ext_resource type="Theme" uid="uid://dg3o4ix28q4n0" path="res://themes/default_theme.tres" id="2_ny1s3"]
 
 [node name="LobbyList" type="CanvasLayer" unique_id=1735094091]
 script = ExtResource("1_dtt3s")
@@ -11,20 +12,44 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_ny1s3")
 
-[node name="Spacer" type="Control" parent="VBoxContainer" unique_id=356638887]
-custom_minimum_size = Vector2(0, 150)
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=796567833]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=1694668062]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=1526416671]
+[node name="GoBackButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer" unique_id=2046993393]
+layout_mode = 2
+text = "Go Back"
+
+[node name="Spacer" type="Control" parent="VBoxContainer" unique_id=356638887]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=759517820]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=1526416671]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Lobbies"
 horizontal_alignment = 1
 
-[node name="LobbyListContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1942393975]
-custom_minimum_size = Vector2(250, 0)
+[node name="LobbyListContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=1942393975]
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 6
 alignment = 1
+
+[node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=845702835]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/GoBackButton" to="." method="_on_go_back_button_pressed"]

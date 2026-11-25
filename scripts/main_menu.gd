@@ -12,7 +12,8 @@ func _ready() -> void:
 	create_lobby.hide()
 
 func _on_player_name_input_text_submitted(new_nickname: String) -> void:
-	NetworkHandler.local_nickname = new_nickname
+	NetworkHandler.local_nickname = new_nickname.strip_edges()
+	player_name_input.release_focus()
 
 func _on_create_lobby_button_pressed() -> void:
 	button_container.hide()

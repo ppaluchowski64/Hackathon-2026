@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var lobby_list_container: VBoxContainer = $VBoxContainer/LobbyListContainer
+@onready var lobby_list_container: VBoxContainer = $VBoxContainer/VBoxContainer/LobbyListContainer
 
 func _ready() -> void:
 	NetworkHandler.lobby_list_received.connect(_on_lobby_list_received)
@@ -16,7 +16,11 @@ func _exit_tree() -> void:
 		NetworkHandler.join_lobby_result.disconnect(_on_join_lobby_result)
 
 func _on_visibility_changed() -> void:
+<<<<<<< Updated upstream
 	if visible:
+=======
+	if visible and multiplayer.has_multiplayer_peer():
+>>>>>>> Stashed changes
 		NetworkHandler.fetch_lobby_list()
 
 func _load_preview_lobbies() -> void:
@@ -30,6 +34,15 @@ func _load_preview_lobbies() -> void:
 func _on_lobby_list_received(lobby_list: Array) -> void:
 	for child in lobby_list_container.get_children():
 		child.queue_free()
+
+	if lobby_list.is_empty():
+		var empty_label := Label.new()
+		empty_label.name = "EmptyLobbiesLabel"
+		empty_label.text = "No active lobbies"
+		empty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty_label.add_theme_color_override("font_color", Color(0.7, 0.72, 0.78))
+		lobby_list_container.add_child(empty_label)
+		return
 
 	for lobby in lobby_list:
 		var room_id: String = lobby["room_id"]
@@ -121,3 +134,7 @@ func _on_lobby_list_received(lobby_list: Array) -> void:
 func _on_join_lobby_result(success: bool, _message: String = "") -> void:
 	if success:
 		get_tree().change_scene_to_file("res://scenes/root/game.tscn")
+
+
+func _on_go_back_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

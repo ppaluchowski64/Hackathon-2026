@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://dg3o4ix28q4n0"]
+
+[ext_resource type="FontFile" uid="uid://dwemx85xbau0h" path="res://fonts/grixelacme9regularxtnd_8.fnt" id="1_mlkpy"]
+
+[resource]
+default_font = ExtResource("1_mlkpy")
