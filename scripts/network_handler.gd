@@ -3,6 +3,7 @@ extends Node
 signal lobby_list_received(lobby_list: Array)
 signal join_lobby_result(success: bool, message: String)
 signal lobby_updated(peers: Array, names: Dictionary)
+signal level_seed_ready(world_seed: int)
 signal game_started
 
 var multiplayer_peer = ENetMultiplayerPeer.new()
@@ -18,6 +19,8 @@ var peer_to_room: Dictionary = {}
 var local_room_id: String = ""
 var peer_ids: Array[int] = []
 var player_names: Dictionary = {}
+
+var local_world_seed: int = 0
 
 var local_nickname: String
 
@@ -77,17 +80,19 @@ func request_create_lobby(lobby_name: String, nickname: String) -> void:
 	rooms[room_id] = {
 		"name": clean_name,
 		"peers": [],
+		"dead_peers": [],
 		"names": {},
 		"in_game": false,
-		"match_node": null
+		"match_node": null,
+		"seed": randi()
 	}
 
 	var room = rooms[room_id]
 
 	add_peer_to_room(sender_id, room_id, clean_nick)
-	print("join lobby response")
 
 	rpc_id(sender_id, "join_lobby_response", true, "Lobby created!", room_id, room["peers"], room["names"])
+	rpc_id(sender_id, "receive_level_seed", int(room["seed"]))
 	broadcast_lobby_list()
 
 func build_lobby_list() -> Array:
@@ -149,10 +154,12 @@ func request_join_lobby(room_id: String, nickname: String) -> void:
 
 	var clean_nick := nickname.strip_edges().left(20)
 	if clean_nick.is_empty():
-		clean_nick = "Player_%d" % sender_id
+		clean_nick = "Player_%d" % int(str(sender_id).left(2))
 
 	add_peer_to_room(sender_id, room_id, clean_nick)
 	rpc_id(sender_id, "join_lobby_response", true, "joined!", room_id, room["peers"], room["names"])
+
+	rpc_id(sender_id, "receive_level_seed", int(room["seed"]))
 
 	for existing_peer in room["peers"]:
 		if existing_peer != sender_id:
@@ -176,7 +183,88 @@ func join_lobby_response(success: bool, msg: String, room_id: String, peers: Arr
 	join_lobby_result.emit(success, msg)
 
 @rpc("any_peer", "reliable")
+func report_player_died() -> void:
+	if not multiplayer.is_server():
+		return
+
+	var sender_id: int = multiplayer.get_remote_sender_id()
+	
+	if not peer_to_room.has(sender_id):
+		return
+
+	var room_id: String = peer_to_room[sender_id]
+	
+	if not rooms.has(room_id):
+		return
+
+	var room = rooms[room_id]
+	
+	if not room.has("dead_peers"):
+		room["dead_peers"] = []
+
+	if sender_id not in room["dead_peers"]:
+		room["dead_peers"].append(sender_id)
+
+	if not room["peers"].is_empty() and room["dead_peers"].size() >= room["peers"].size():
+		restart_room_match(room)
+
+@rpc("any_peer", "reliable")
+func request_restart_match() -> void:
+	if not multiplayer.is_server():
+		return
+	
+	var sender_id: int = multiplayer.get_remote_sender_id()
+	if not peer_to_room.has(sender_id):
+		return
+	
+	var room_id: String = peer_to_room[sender_id]
+	var room = rooms[room_id]
+
+	if room == null:
+		return
+	
+	restart_room_match(room)
+
+func restart_room_match(room: Dictionary) -> void:
+	room["dead_peers"].clear()
+	room["seed"] = randi()
+	room["in_game"] = false
+	broadcast_lobby_list()
+
+	for peer_id in room["peers"]:
+		rpc_id(peer_id, "receive_level_seed", int(room["seed"]))
+
+@rpc("authority", "reliable")
+func receive_level_seed(world_seed: int) -> void:
+	local_world_seed = world_seed
+	level_seed_ready.emit(world_seed)
+
+@rpc("any_peer", "reliable")
 func request_start_game() -> void:
+	if not multiplayer.is_server():
+		return
+
+	var sender_id: int = multiplayer.get_remote_sender_id()
+	var room_id: String = peer_to_room[sender_id]
+	var room = rooms.get(room_id)
+
+	if room == null:
+		return
+
+	if room["peers"].is_empty() or room["peers"][0] != sender_id:
+		return
+	
+	if room.has("dead_peers"):
+		room["dead_peers"].clear()
+
+	room["in_game"] = true
+	broadcast_lobby_list()
+
+	for peer_id in room["peers"]:
+		rpc_id(peer_id, "receive_game_started")
+
+@rpc("authority", "reliable")
+func receive_game_started() -> void:
 	game_started.emit()
 
 func add_peer_to_room(peer_id: int, room_id: String, nickname: String) -> void:

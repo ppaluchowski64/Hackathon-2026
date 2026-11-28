@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://brgigkulyxsyh" path="res://scripts/lobby.gd" id="1_o1atq"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1atq"]
+bg_color = Color(0.83076954, 0.46120995, 0.63922817, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Lobby" type="CanvasLayer" unique_id=2054422290]
 script = ExtResource("1_o1atq")
 
@@ -20,4 +27,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_o1atq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_o1atq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o1atq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o1atq")
 text = "Start the Game"

@@ -21,6 +21,11 @@ config/icon="res://icon.svg"
 Fullscreen="*uid://dct1x5n31cpjl"
 NetworkHandler="*uid://c5xj0107gee3s"
 Global="*uid://brfxo57cinqtm"
+SignalBus="*uid://ohnw02jxfc0a"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 

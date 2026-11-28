@@ -3,6 +3,8 @@ extends Node
 @onready var story_sprite: Sprite2D = get_tree().get_first_node_in_group("story")
 @onready var story_rect: ColorRect = get_tree().get_first_node_in_group("story_rect")
 
+var game_started: bool = false
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 #	story_sprite.visible = true

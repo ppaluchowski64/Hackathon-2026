@@ -15,12 +15,9 @@ func _on_lobby_name_input_text_submitted(new_lobby_name: String) -> void:
 func _on_create_lobby_button_pressed() -> void:
 	NetworkHandler.create_lobby(lobby_name_input.text.strip_edges())
 
-func _on_join_lobby_result(success: bool, message: String) -> void:
-	print("result:", success)
+func _on_join_lobby_result(success: bool, _message: String) -> void:
 	if success and is_inside_tree():
 		get_tree().change_scene_to_file("res://scenes/root/game.tscn")
-	else:
-		push_warning(message)
 
 func _on_go_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

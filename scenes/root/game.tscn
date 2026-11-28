@@ -244,9 +244,9 @@ offset_bottom = 516.0
 toggle_mode = true
 text = "use item on"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=248460320]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=248460320]
 stream = ExtResource("14_l77qo")
-autoplay = true
+volume_db = -28.61
 
 [node name="Button" parent="." unique_id=1513311356 instance=ExtResource("17_sh5j3")]
 position = Vector2(0, -950)

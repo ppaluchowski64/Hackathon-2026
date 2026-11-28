@@ -8,11 +8,11 @@ func _draw() -> void:
 	if player.collectable == -1:
 		return
 	
-	draw_line(Vector2(8, 5).rotated(player.global_rotation), player.collectable_sprite.global_position - player.position, Color("#000000"), 10)
-	draw_line(Vector2(8, 5).rotated(player.global_rotation), player.collectable_sprite.global_position - player.position, Color("#8a423a"), 8)
+	draw_line(Vector2(8, 5).rotated(player.global_rotation), player.collectable_sprite.global_position - player.global_position, Color("#000000"), 10)
+	draw_line(Vector2(8, 5).rotated(player.global_rotation), player.collectable_sprite.global_position - player.global_position, Color("#8a423a"), 8)
 	
-	var rot: float = (Vector2(8, 5).rotated(player.global_rotation) - (player.collectable_sprite.global_position - player.position)).angle() - PI / 2
-	draw_set_transform(player.collectable_sprite.global_position - player.position, rot)
+	var rot: float = (Vector2(8, 5).rotated(player.global_rotation) - (player.collectable_sprite.global_position - player.global_position)).angle() - PI / 2
+	draw_set_transform(player.collectable_sprite.global_position - player.global_position, rot)
 	draw_texture(texture, -texture.get_size() / 2)
 	draw_set_transform(Vector2.ZERO)
 

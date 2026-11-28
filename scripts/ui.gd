@@ -7,10 +7,15 @@ extends CanvasLayer
 @onready var color_rect: ColorRect = $ColorRect
 @onready var notion_label: Label = $ColorRect/NotionLabel
 
+func _ready() -> void:
+	SignalBus.setup_player.connect(func(passed_player: Player):
+		player = passed_player
+	)
+
 func _physics_process(_delta: float) -> void:
 	if not player:
 		return
-	
+
 	reach_label.text = "reach: %d" % player.reach
 	height_label.text = "height: %d" % player.height
 	

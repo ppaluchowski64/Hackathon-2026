@@ -4,6 +4,11 @@ extends Node2D
 var size := Vector2(400, 50)
 var sub_size := Vector2(350, 20)
 
+func _ready() -> void:
+	SignalBus.setup_player.connect(func(passed_player: Player):
+		player = passed_player
+	)
+
 func _draw() -> void:
 	if not player:
 		return
